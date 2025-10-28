@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Añadimos mapeo y umbrales en la misma pestaña del conector -->
+  <record id="palletways_ext_carrier_view" model="ir.ui.view">
+    <field name="name">palletways.ext.carrier.view</field>
+    <field name="model">delivery.carrier</field>
+    <field name="inherit_id" ref="palletways_shipping_integration.palletways_method_configuration"/>
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='palletways_configuration']/group" position="inside">
+        <group string="Bill Unit mapping (Ext)">
+          <field name="palletways_bill_full_id"/>
+          <field name="palletways_bill_light_id"/>
+          <field name="palletways_bill_half_id"/>
+          <field name="palletways_bill_extra_light_id"/>
+          <field name="palletways_bill_quarter_id"/>
+          <field name="palletways_bill_mini_quarter_id"/>
+        </group>
+        <group string="Umbrales (kg)">
+          <field name="palletways_full_max"/>
+          <field name="palletways_light_max"/>
+          <field name="palletways_half_max"/>
+          <field name="palletways_extra_light_max"/>
+          <field name="palletways_quarter_max"/>
+          <field name="palletways_mini_quarter_max"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

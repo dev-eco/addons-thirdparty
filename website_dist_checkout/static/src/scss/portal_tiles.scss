@@ -1,0 +1,39 @@
+/* Portal tiles: look & feel como los del core */
+.o_portal_doc.o_wdc_tile {
+  background: var(--o-gray-100);           /* fondo suave del tema */
+  border-radius: 12px;                     /* esquinas redondeadas */
+  padding: 1.25rem;
+  transition: background .15s ease-in-out, box-shadow .15s ease-in-out;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.o_portal_doc.o_wdc_tile:hover {
+  background: var(--o-gray-200);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  text-decoration: none;
+}
+
+.o_wdc_tile_icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--o-color-1-100);        /* tono de la marca */
+  color: var(--o-color-1);                 /* color principal */
+  flex: 0 0 64px;
+}
+.o_wdc_tile_icon i {
+  font-size: 28px;                         /* icono grande */
+  line-height: 1;
+}
+
+.o_wdc_tile_content h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--o-main-text-color);
+}
+.o_wdc_tile_content p {
+  font-size: .95rem;
+}

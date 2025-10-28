@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Integra un enlace clicable al tracking en la columna "Tracking" del template portal_dist_orders -->
+  <template id="palletways_portal_dist_orders_tracking"
+            inherit_id="website_dist_checkout.portal_dist_orders"
+            name="Portal Distributor Orders - Tracking link">
+
+    <!-- Localizamos la celda de tracking por el span con t-att-title original y la reemplazamos -->
+    <xpath expr="//td[.//span[@t-att-title=&quot;deliveries.get(so.id, {}).get('tracking','')&quot;]]"
+           position="replace">
+      <td style="max-width:180px;">
+        <t t-set="pick"
+           t-value="so.picking_ids.filtered(lambda p: p.picking_type_code == 'outgoing' and p.carrier_tracking_ref)[:1]"/>
+        <t t-if="pick">
+          <span class="text-truncate d-inline-block" style="max-width: 180px;"
+                t-att-title="pick.carrier_tracking_ref">
+            <a t-att-href="pick.carrier_id and pick.carrier_id.get_tracking_link(pick) or '#'"
+               target="_blank" rel="noopener">
+              <t t-esc="pick.carrier_tracking_ref"/>
+            </a>
+          </span>
+        </t>
+        <t t-else="">
+          <span class="text-truncate d-inline-block" style="max-width: 180px;">-</span>
+        </t>
+      </td>
+    </xpath>
+  </template>
+</odoo>

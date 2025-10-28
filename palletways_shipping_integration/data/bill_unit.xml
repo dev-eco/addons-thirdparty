@@ -1,0 +1,28 @@
+<odoo>
+	<data noupdate="1">
+		<record id="full_pallet" model="bill.unit">
+			<field name="bill_unit_key">FP</field>
+			<field name="bill_unit_value">Full Pallet - (1200kg)</field>
+		</record>
+		<record id="light_pallet" model="bill.unit">
+			<field name="bill_unit_key">LP</field>
+			<field name="bill_unit_value">Light Pallet - (750kg)</field>
+		</record>
+		<record id="half_pallet" model="bill.unit">
+			<field name="bill_unit_key">HP</field>
+			<field name="bill_unit_value">Half Pallet - (600kg)</field>
+		</record>
+        	<record id="extra_light_pallet" model="bill.unit">
+			<field name="bill_unit_key">ELP</field>
+			<field name="bill_unit_value">Extra Light Pallet - (450kg)</field>
+		</record>
+		<record id="quarter_pallet" model="bill.unit">
+			<field name="bill_unit_key">QP</field>
+			<field name="bill_unit_value">Quarter Pallet - (300kg)</field>
+		</record>
+		<record id="mini_quarter_pallet" model="bill.unit">
+			<field name="bill_unit_key">MQP</field>
+			<field name="bill_unit_value">Mini Quarter Pallet - (150kg)</field>
+		</record>
+	</data>
+</odoo>

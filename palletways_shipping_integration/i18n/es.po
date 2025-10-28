@@ -1,0 +1,369 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * palletways_shipping_integration
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0.20250520\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-04 14:19+0000\n"
+"PO-Revision-Date: 2025-09-04 14:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_sale_order__palletways_service_ids
+msgid "Available Services"
+msgstr "Servicios disponibles"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_delivery_carrier__bill_unit_ids
+msgid "Bill Unit"
+msgstr "Unidad de facturación"
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__create_uid
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__create_date
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__display_name
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid "Error de comunicación con Palletways (availableServices): %s"
+msgstr "Error de comunicación con Palletways (availableServices): %s"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Error de comunicación con Palletways (createconsignment): %s"
+msgstr "Error de comunicación con Palletways (createconsignment): %s"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid ""
+"For Get Service Receiver Zip Code and Country Is Required Please Enter Zip "
+"Code and Country OF Receiver"
+msgstr "Para obtener servicios, el código postal y el país del destinatario son obligatorios. Introduce el CP y el país del destinatario."
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid ""
+"For Get Service Sender Zip Code and Country Is Required Please Enter Zip "
+"Code and Country OF Sender"
+msgstr "Para obtener servicios, el código postal y el país del remitente son obligatorios. Introduce el CP y el país del remitente."
+
+#. module: palletways_shipping_integration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.available_service_page
+msgid "Get Services"
+msgstr "Obtener servicios"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,help:palletways_shipping_integration.field_res_company__palletways_api_url
+msgid "Get URL details from palletways"
+msgstr "Obtén la URL desde Palletways"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__id
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__id
+msgid "ID"
+msgstr "ID"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_res_company__use_palletways_shipping_provider
+msgid "Is Use Palletways Shipping Provider?"
+msgstr "¿Usar Palletways como proveedor de envíos?"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__bill_unit_key
+msgid "Key"
+msgstr "Clave"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Label Created %s"
+msgstr "Etiqueta creada %s"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__write_uid
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__write_date
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_days_max
+msgid "Max Days"
+msgstr "Días máximos"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_days_min
+msgid "Min Days"
+msgstr "Días mínimos"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "No se pudo obtener la etiqueta (GET: %s, POST: %s)"
+msgstr "No se pudo obtener la etiqueta (GET: %s, POST: %s)"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_delivery_carrier__notification
+msgid "Notification?"
+msgstr "¿Notificación?"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_stock_picking__number_of_lifts
+msgid "Number Of Lifts"
+msgstr "Número de elevaciones"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_bill_unit__bill_unit_value
+msgid "Pallet Bill unit"
+msgstr "Unidad de facturación de palet"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields.selection,name:palletways_shipping_integration.selection__delivery_carrier__delivery_type__palletways
+msgid "Palletways"
+msgstr "Palletways"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_res_company__palletways_api_key
+msgid "Palletways API Key"
+msgstr "Clave API de Palletways"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid "Palletways API Key no configurada en la Compañía."
+msgstr "Palletways API Key no configurada en la Compañía."
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_res_company__palletways_api_url
+msgid "Palletways API URL"
+msgstr "URL de la API de Palletways"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid "Palletways API URL no configurada en la Compañía."
+msgstr "Palletways API URL no configurada en la Compañía."
+
+#. module: palletways_shipping_integration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.palletways_configuration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.palletways_method_configuration
+msgid "Palletways Configuration"
+msgstr "Configuración de Palletways"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_sale_order__palletways_service_id
+msgid "Palletways Service"
+msgstr "Servicio de Palletways"
+
+#. module: palletways_shipping_integration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.available_service_page
+msgid "Palletways Services"
+msgstr "Servicios de Palletways"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Please Define Proper Recipient Address like name,zip,city,country!"
+msgstr "Define una dirección de destinatario válida con nombre, código postal, ciudad y país."
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Please Define Proper Sender Address like name,zip,city,country!"
+msgstr "Define una dirección de remitente válida con nombre, código postal, ciudad y país."
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Please Select Any Palletways Service From Sale Order"
+msgstr "Selecciona un servicio de Palletways en el pedido de venta."
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/sale_order.py:0
+#, python-format
+msgid "Respuesta de servicios inesperada: %s"
+msgstr "Respuesta de servicios inesperada: %s"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Respuesta inesperada (sin detalles): %s"
+msgstr "Respuesta inesperada (sin detalles): %s"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Respuesta inesperada de Palletways (createconsignment): %s"
+msgstr "Respuesta inesperada de Palletways (createconsignment): %s"
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_sale_order
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__sale_order_id
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Select a Company on the Palletways carrier."
+msgstr "Selecciona una compañía en el método de entrega de Palletways."
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Select at least one Bill Unit on the Palletways carrier."
+msgstr "Selecciona al menos una Unidad de facturación en el método de entrega de Palletways."
+
+#. module: palletways_shipping_integration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.available_service_page
+msgid "Service"
+msgstr "Servicio"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_code
+msgid "Service Code"
+msgstr "Código de servicio"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_group_code
+msgid "Service Group Code"
+msgstr "Código del grupo de servicio"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_group_name
+msgid "Service Group Name"
+msgstr "Nombre del grupo de servicio"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_palletways_service__service_name
+msgid "Service Name"
+msgstr "Nombre del servicio"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid "Shipment weight less than 1 is not allowed"
+msgstr "No se permite un peso de envío inferior a 1."
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,field_description:palletways_shipping_integration.field_delivery_carrier__tail_lift
+msgid "Tail Lift?"
+msgstr "¿Plataforma elevadora?"
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,help:palletways_shipping_integration.field_res_company__use_palletways_shipping_provider
+msgid "True when we need to use palletways shipping provider"
+msgstr "Verdadero cuando necesitemos usar el proveedor de envíos Palletways"
+
+#. module: palletways_shipping_integration
+#: model_terms:ir.ui.view,arch_db:palletways_shipping_integration.available_service_page
+msgid "Use Service"
+msgstr "Usar servicio"
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/res_company.py:0
+#, python-format
+msgid "When using Palletways provider you must configure API URL and API Key."
+msgstr "Al usar el proveedor Palletways debes configurar la URL de la API y la clave API."
+
+#. module: palletways_shipping_integration
+#. odoo-python
+#: code:addons/palletways_shipping_integration/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"You Can Not Cancel Order! Because Palletways Did Not Provide Cancel API"
+msgstr "No puedes cancelar el envío; Palletways no dispone de API de cancelación."
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,help:palletways_shipping_integration.field_res_company__palletways_api_key
+msgid "You need to enter encoded api key here ,which is given by paletways"
+msgstr "Introduce aquí la clave API codificada proporcionada por Palletways."
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_bill_unit
+msgid "bill.unit"
+msgstr "Unidad de facturación"
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,help:palletways_shipping_integration.field_delivery_carrier__tail_lift
+msgid "if pallets need tail lift mark this as a true"
+msgstr "Si los palets requieren plataforma elevadora, márcalo como verdadero."
+
+#. module: palletways_shipping_integration
+#: model:ir.model.fields,help:palletways_shipping_integration.field_sale_order__palletways_service_id
+msgid "palletways service"
+msgstr "servicio de Palletways"
+
+#. module: palletways_shipping_integration
+#: model:ir.model,name:palletways_shipping_integration.model_palletways_service
+msgid "palletways.service"
+msgstr "Servicio de Palletways"

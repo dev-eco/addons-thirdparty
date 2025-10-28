@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="portal_home_dist_tile"
+            inherit_id="portal.portal_my_home"
+            name="Portal home: tile distributor orders">
+
+    <!-- Inserta nuestro set de tiles después del último bloque de tiles del core -->
+    <xpath expr="//div[hasclass('o_portal_docs')][last()]" position="after">
+      <div class="o_portal_docs mt-3">
+        <!-- Tile: Panel Distribuidor -->
+        <a class="o_portal_doc o_wdc_tile d-flex align-items-center text-decoration-none"
+           href="/my/distributor/orders">
+          <div class="o_wdc_tile_icon me-3">
+            <!-- Puedes cambiar el icono; fa-truck funciona muy bien para logística -->
+            <img src="/website_dist_checkout/static/src/img/delivery-cargo.svg" loading="lazy" alt="" width="64px" height="64px"/>
+          </div>
+          <div class="o_wdc_tile_content">
+            <h3 class="m-0">Pedidos (Distribuidor)</h3>
+            <p class="m-0 mt-1 text-muted">
+              Consulte, importe CSV y gestione envíos y tracking.
+            </p>
+          </div>
+        </a>
+
+        <!-- (Opcional) Un segundo tile directo a Palletways si quieres separarlo -->
+        <!--
+        <a class="o_portal_doc o_wdc_tile d-flex align-items-center text-decoration-none mt-3"
+           href="/my/distributor/orders?carrier=palletways">
+          <div class="o_wdc_tile_icon me-3">
+            <i class="fa fa-pallet"></i>
+          </div>
+          <div class="o_wdc_tile_content">
+            <h3 class="m-0">Envíos Palletways</h3>
+            <p class="m-0 mt-1 text-muted">
+              Calcule precio por paletización y confirme la expedición.
+            </p>
+          </div>
+        </a>
+        -->
+      </div>
+    </xpath>
+
+  </template>
+</odoo>

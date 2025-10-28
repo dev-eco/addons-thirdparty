@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+# No se crean nuevos modelos; control de acceso mediante portal + sudo seguro en el controlador

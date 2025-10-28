@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_picking_form_dist_fields" model="ir.ui.view">
+    <field name="name">stock.picking.form.dist.fields</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <!-- Insertamos una pestaña dentro del notebook del albarán -->
+      <xpath expr="//sheet/notebook" position="inside">
+        <page string="Envío distribuidor">
+          <group>
+            <group>
+              <field name="dist_carrier_name"/>
+              <field name="dist_carrier_account"/>
+              <field name="dist_pickup_datetime"/>
+              <field name="dist_pickup_slot"/>
+            </group>
+            <group>
+              <!-- Adjuntos como Many2one estándar a ir.attachment -->
+              <field name="dist_label_attachment_id" context="{'bin_size': False}"/>
+              <field name="dist_packing_slip_attachment_id" context="{'bin_size': False}"/>
+            </group>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>
