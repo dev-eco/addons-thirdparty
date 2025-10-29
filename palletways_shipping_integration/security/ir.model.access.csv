@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_palletways_salesmanager,palletways,model_palletways_service,sales_team.group_sale_salesman,1,1,1,0
-access_palletways_salesman,palletways,model_palletways_service,sales_team.group_sale_salesman,1,1,1,0
-access_palletways_salesmanager,palletways,model_bill_unit,sales_team.group_sale_salesman,1,1,1,0
-
+access_palletways_service_salesmanager,palletways,model_palletways_service,sales_team.group_sale_salesman,1,1,1,0
+access_palletways_service_salesman,palletways,model_palletways_service,sales_team.group_sale_salesman,1,1,1,0
+access_palletways_bill_unit_salesmanager,palletways,model_bill_unit,sales_team.group_sale_salesman,1,1,1,0

@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <!-- Vista base para pedidos de distribuidor -->
+  <template id="portal_dist_orders" name="Portal Distribuidor Orders">
+    <t t-call="portal.portal_layout">
+      <div class="container mt-4">
+        <h2>Pedidos de Distribuidor</h2>
+        <div class="row mt-4">
+          <div class="col-12">
+            <table class="table table-sm table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Pedido</th>
+                  <th>Fecha</th>
+                  <th>Cliente</th>
+                  <th>Estado</th>
+                  <th>Tracking</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr t-foreach="orders" t-as="so">
+                  <td>
+                    <a t-att-href="'/my/orders/' + str(so.id)" t-esc="so.name"/>
+                  </td>
+                  <td t-esc="so.date_order" t-options="{'widget': 'date'}"/>
+                  <td t-esc="so.partner_id.name"/>
+                  <td>
+                    <span t-field="so.state" t-options="{'widget': 'badge'}"/>
+                  </td>
+                  <td>
+                    <span class="text-truncate d-inline-block" style="max-width: 180px;"
+                          t-att-title="deliveries.get(so.id, {}).get('tracking','')">
+                      <t t-esc="deliveries.get(so.id, {}).get('tracking', '-')"/>
+                    </span>
+                  </td>
+                  <td>
+                    <a t-if="so.dist_is_managed and so.state == 'sale'"
+                       t-att-href="'/distribuidor/pedido/%s/envio' % so.id"
+                       class="btn btn-sm btn-primary">
+                      <i class="fa fa-truck"/> Gestionar Envío
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+
   <!-- Integra un enlace clicable al tracking en la columna "Tracking" del template portal_dist_orders -->
   <template id="palletways_portal_dist_orders_tracking"
-            inherit_id="website_dist_checkout.portal_dist_orders"
+            inherit_id="palletways_shipping_integration_ext.portal_dist_orders"
             name="Portal Distributor Orders - Tracking link">
 
     <!-- Localizamos la celda de tracking por el span con t-att-title original y la reemplazamos -->
