@@ -496,3 +496,12 @@
 # 2025-10-29 09:51:07.869474
 +Vale, se ha corregido, ahora me muestra este error que es que no existe el archivo. Yo lo creo manual, solo genera el código y yo lo pego.
 +FileNotFoundError: File not found: palletways_shipping_integration_ext/data/cron.xml
+
+# 2025-10-29 09:56:13.912178
++n
+
+# 2025-10-29 09:56:17.784974
++y
+
+# 2025-10-29 15:33:28.025352
++/quit
