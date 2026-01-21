@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Datos de demostración para Cliente API Palletways -->
+        <record id="demo_palletways_api_client" model="palletways.api.client">
+            <field name="name">Palletways API Demo</field>
+            <field name="api_endpoint">https://portal.palletways.com/api/</field>
+            <field name="account_code">DEMO123</field>
+            <field name="api_key">demo_api_key_replace_with_real</field>
+            <field name="test_mode">True</field>
+        </record>
+
+        <!-- Transportista demo actualizado -->
+        <record id="demo_delivery_carrier_palletways" model="delivery.carrier">
+            <field name="name">Palletways Demo</field>
+            <field name="delivery_type">palletways</field>
+            <field name="palletways_api_client_id" ref="demo_palletways_api_client"/>
+            <field name="palletways_service_code">B</field>
+            <field name="palletways_default_bill_unit">FP</field>
+            <field name="palletways_auto_book_in">True</field>
+            <field name="palletways_auto_taillift">True</field>
+            <field name="palletways_auto_handball">False</field>
+        </record>
+    </data>
+</odoo>

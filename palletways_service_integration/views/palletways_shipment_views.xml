@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista formulario para Envíos Palletways -->
+        <record id="view_palletways_shipment_form" model="ir.ui.view">
+            <field name="name">palletways.shipment.form</field>
+            <field name="model">palletways.shipment</field>
+            <field name="arch" type="xml">
+                <form string="Envío Palletways">
+                    <header>
+                        <button name="action_update_status" type="object" 
+                                string="Actualizar Estado" class="btn-primary"/>
+                        <button name="action_download_labels" type="object" 
+                                string="Descargar Etiquetas" class="btn-secondary"/>
+                        <button name="action_download_pod" type="object" 
+                                string="Descargar POD" class="btn-secondary"
+                                invisible="status != 'delivered'"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tracking_id"/>
+                                <div class="alert alert-warning" role="alert" invisible="not tracking_id or not tracking_id.startswith('TEST-')">
+                                    <strong>⚠️ Envío de Prueba</strong><br/>
+                                    Este es un envío TEST. Las etiquetas y PODs no están disponibles.<br/>
+                                    Para envíos reales, configure su API Key con permisos de creación.
+                                </div>
+                                <field name="picking_id"/>
+                                <field name="response_id"/>
+                                <field name="consignment_number"/>
+                            </group>
+                            <group>
+                                <field name="service_code"/>
+                                <field name="service_name"/>
+                                <field name="weight"/>
+                                <field name="pallets"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="collection_date"/>
+                                <field name="delivery_date"/>
+                                <field name="actual_delivery_date"/>
+                            </group>
+                            <group>
+                                <field name="palletways_status_code"/>
+                                <field name="palletways_status_desc"/>
+                                <field name="last_update"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Notas">
+                                <field name="notes"/>
+                            </page>
+                            <page string="Respuesta API">
+                                <field name="api_response"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista lista -->
+        <record id="view_palletways_shipment_tree" model="ir.ui.view">
+            <field name="name">palletways.shipment.tree</field>
+            <field name="model">palletways.shipment</field>
+            <field name="arch" type="xml">
+                <tree string="Envíos Palletways">
+                    <field name="tracking_id"/>
+                    <field name="picking_id"/>
+                    <field name="partner_id"/>
+                    <field name="status"/>
+                    <field name="service_name"/>
+                    <field name="weight"/>
+                    <field name="last_update"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción -->
+        <record id="action_palletways_shipment" model="ir.actions.act_window">
+            <field name="name">Envíos Palletways</field>
+            <field name="res_model">palletways.shipment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
