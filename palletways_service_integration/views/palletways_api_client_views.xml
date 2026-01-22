@@ -12,18 +12,68 @@
                                 string="Probar Conexión" class="btn-primary"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" 
+                                    name="action_test_connection" icon="fa-plug">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Test</span>
+                                    <span class="o_stat_text">Conexión</span>
+                                </div>
+                            </button>
+                        </div>
+                        
                         <group>
-                            <group>
+                            <group string="Información Básica">
                                 <field name="name"/>
                                 <field name="company_id"/>
                                 <field name="active"/>
                             </group>
-                            <group>
+                            <group string="Configuración">
                                 <field name="test_mode"/>
-                                <field name="api_endpoint"/>
+                                <field name="api_endpoint_type" widget="radio"/>
+                                <field name="api_endpoint" readonly="1"/>
                             </group>
                         </group>
-                        <group>
+                        
+                        <!-- ✅ CORRECCIÓN v2.5.0: Información sobre endpoints -->
+                        <div class="alert alert-info" role="alert">
+                            <h4>ℹ️ Información sobre Endpoints</h4>
+                            <p><strong>API Global (api.palletways.com):</strong></p>
+                            <ul>
+                                <li>✅ Recomendado para createConsignment</li>
+                                <li>✅ Funciona con cuentas CUSTOMER y DEPOT</li>
+                                <li>✅ Soporta todos los métodos estándar</li>
+                            </ul>
+                            
+                            <p><strong>Portal API (portal.palletways.com/api):</strong></p>
+                            <ul>
+                                <li>✅ Endpoint legacy para compatibilidad</li>
+                                <li>✅ Algunos métodos específicos solo funcionan aquí</li>
+                                <li>⚠️ Use solo si API Global falla</li>
+                            </ul>
+                            
+                            <p><strong>💡 Para cuentas DEPOT (ej: D518-1-DAYO):</strong></p>
+                            <ul>
+                                <li>✅ Puede usar AMBOS endpoints</li>
+                                <li>✅ Recomendado: API Global para createConsignment</li>
+                                <li>⚠️ Si falla, intente cambiar a Portal API</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- ✅ CORRECCIÓN v2.1.9: Advertencia sobre test_mode -->
+                        <div class="alert alert-warning" role="alert" invisible="not test_mode">
+                            <strong>⚠️ MODO PRUEBA ACTIVADO</strong><br/>
+                            <p>Con el modo prueba activado:</p>
+                            <ul>
+                                <li>✅ Se validan los datos del envío</li>
+                                <li>❌ NO se crea el envío real en Palletways</li>
+                                <li>❌ NO se genera ResponseID</li>
+                                <li>❌ NO se pueden descargar etiquetas</li>
+                            </ul>
+                            <p><strong>Para crear envíos reales:</strong> Desactive este campo</p>
+                        </div>
+                        
+                        <group string="Credenciales">
                             <group>
                                 <field name="account_code"/>
                                 <field name="api_key" password="True"/>
@@ -33,6 +83,47 @@
                                 <field name="request_count" readonly="1"/>
                             </group>
                         </group>
+                        
+                        <notebook>
+                            <page string="Modo Prueba vs Producción" name="test_mode_info">
+                                <group>
+                                    <div class="alert alert-info" role="alert">
+                                        <h4>📋 Comportamiento según Modo Prueba</h4>
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <tr style="background-color: #f0f0f0;">
+                                                <th style="border: 1px solid #ddd; padding: 8px;">Modo Prueba</th>
+                                                <th style="border: 1px solid #ddd; padding: 8px;">commit</th>
+                                                <th style="border: 1px solid #ddd; padding: 8px;">Confirm</th>
+                                                <th style="border: 1px solid #ddd; padding: 8px;">Resultado</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 1px solid #ddd; padding: 8px;"><strong>✅ Activado (True)</strong></td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">no</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">no</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">❌ Sin ResponseID</td>
+                                            </tr>
+                                            <tr style="background-color: #f9f9f9;">
+                                                <td style="border: 1px solid #ddd; padding: 8px;"><strong>❌ Desactivado (False)</strong></td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">yes</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">yes</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;">✅ Con ResponseID</td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <h4 style="margin-top: 20px;">🔧 Para crear envíos REALES:</h4>
+                                        <ol>
+                                            <li>DESACTIVAR el campo "Modo Prueba"</li>
+                                            <li>Guardar los cambios</li>
+                                            <li>Volver a validar el albarán</li>
+                                        </ol>
+                                        
+                                        <p style="color: red; font-weight: bold;">⚠️ ADVERTENCIA IMPORTANTE:</p>
+                                        <p>Con el modo prueba desactivado, se crearán envíos REALES en Palletways 
+                                        que no se pueden deshacer. Solo desactive cuando esté listo para producción.</p>
+                                    </div>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -46,6 +137,7 @@
                 <tree string="Clientes API Palletways">
                     <field name="name"/>
                     <field name="company_id"/>
+                    <field name="api_endpoint_type"/>
                     <field name="test_mode"/>
                     <field name="active"/>
                 </tree>

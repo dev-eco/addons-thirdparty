@@ -48,11 +48,11 @@ class PalletwaysShipment(models.Model):
     
     # Archivos
     label_pdf = fields.Binary('Etiqueta PDF')
-    label_filename = fields.Char('Nombre Etiqueta', compute='_compute_filenames')
+    label_filename = fields.Char('Nombre Etiqueta', compute='_compute_fil enames')
     pod_pdf = fields.Binary('Comprobante Entrega')
     pod_filename = fields.Char('Nombre POD', compute='_compute_filenames')
     
-    # Estados detallados Palletways
+    # Estados detallados Palletways según documentación oficial página 14
     palletways_status_code = fields.Char('Código Estado PW')
     palletways_status_desc = fields.Char('Descripción Estado PW')
     last_update = fields.Datetime('Última Actualización')
@@ -73,37 +73,49 @@ class PalletwaysShipment(models.Model):
                 client = record.picking_id.carrier_id.palletways_api_client_id
                 record.service_name = client.get_service_description(record.service_code)
             else:
-                # Fallback a nombres básicos según documentación oficial página 6
+                # Fallback a nombres según documentación oficial página 6
                 service_names = {
-                    # Servicios según documentación web oficial
+                    # Premium Delivery
                     'A': 'Next Day Standard',
-                    'B': 'Economy',
-                    'C': 'Collection - Premium',
-                    'D': 'Collection - Economy',
                     'DH': 'Premium Timed Delivery PM (Pre-Booked)',
                     'E': 'Next Day AM',
                     'F': 'Saturday AM',
                     'H': 'Timed Delivery (Pre-Booked)',
-                    'I': 'Remote Contract Collection',
+                    
+                    # Economy Delivery
+                    'B': 'Economy',
                     'J': 'Economy A.M',
                     'K': 'Economy Timed',
-                    'L': '3 Day Service',
-                    'N': 'Collection 3 Day',
-                    'O': 'Premium 48',
-                    'P': 'Collection 5 Day',
-                    'V': 'Collection Premium 48hr',
-                    'X': 'Collection 4 Day',
                     'Z': 'Saturday Economy A.M',
+                    
+                    # Premium Collection
+                    'C': 'Collection - Premium',
+                    'V': 'Collection Premium 48hr',
+                    'I': 'Remote Contract Collection',
+                    
+                    # Economy Collection
+                    'D': 'Collection - Economy',
+                    'N': 'Collection 3 Day',
+                    'P': 'Collection 5 Day',
+                    'X': 'Collection 4 Day',
+                    
+                    # European Premium
                     '0': 'Europe Collect Premium',
                     '1': 'Europe Saturday Premium',
                     '2': 'Europe 2 Day Premium',
                     '3': 'Europe 3 Day Premium',
                     '4': 'Europe 4+ Day Premium',
+                    '9': 'Europe Timed (Pre-Booked)',
+                    
+                    # European Economy
                     '5': 'Europe 5 Day Economy',
                     '6': 'Europe 3 Day Economy',
                     '7': 'Europe 4 Day Economy',
                     '8': 'Europe Collect Economy',
-                    '9': 'Europe Timed (Pre-Booked)',
+                    
+                    # Irish
+                    'O': 'Premium 48',
+                    'L': '3 Day Service',
                 }
                 record.service_name = service_names.get(record.service_code, record.service_code or '')
     
@@ -126,23 +138,44 @@ class PalletwaysShipment(models.Model):
         return result
     
     def action_update_status(self):
-        """Actualizar estado desde Palletways"""
+        """
+        ✅ CORRECCIÓN v2.1.7:
+        Actualizar estado desde Palletways
+        Detecta tracking TEMP- y simula estado
+        Maneja Status como lista o dict
+        """
         updated_count = 0
         error_count = 0
         
         for shipment in self:
             try:
-                # Verificar si es un envío TEST
-                if shipment.tracking_id.startswith('TEST-'):
-                    # Para envíos TEST, simular actualización de estado
+                # ✅ CORRECCIÓN v2.1.7: Verificar si es un envío TEST/TEMP
+                if shipment.tracking_id.startswith('TEST-') or shipment.tracking_id.startswith('TEMP-'):
+                    # Para envíos TEST/TEMP, simular actualización de estado
                     shipment._simulate_test_status_update()
                     updated_count += 1
+                    _logger.info(f"Estado simulado para envío TEST/TEMP: {shipment.tracking_id}")
                     continue
                 
+                # ✅ Para envíos REALES, consultar API
                 client = shipment._get_api_client()
                 status_data = client.get_consignment_status(shipment.tracking_id)
-                shipment._update_status_from_api(status_data)
-                updated_count += 1
+                
+                # ✅ CORRECCIÓN v2.1.7: Manejar Status como lista o dict
+                if status_data:
+                    status = status_data.get('Status', {})
+                    if isinstance(status, list):
+                        status = status[0] if status else {}
+                    
+                    if status.get('Code') == 'OK':
+                        shipment._update_status_from_api(status_data)
+                        updated_count += 1
+                    else:
+                        error_msg = status.get('Description', 'Error desconocido')
+                        _logger.error(f"Error API para {shipment.tracking_id}: {error_msg}")
+                        error_count += 1
+                else:
+                    error_count += 1
                 
             except Exception as e:
                 error_count += 1
@@ -173,13 +206,31 @@ class PalletwaysShipment(models.Model):
         }
     
     def _update_status_from_api(self, api_data):
-        """Actualizar estado local desde respuesta API"""
-        if not api_data or not api_data.get('Status', {}).get('Code') == 'OK':
+        """
+        ✅ CORRECCIÓN v2.1.7:
+        Actualizar estado local desde respuesta API
+        Maneja Status, Detail y Data como lista o dict
+        """
+        if not api_data:
             return
         
-        detail = api_data.get('Detail', {}).get('Data', {})
+        # ✅ CORRECCIÓN v2.1.7: Status puede ser lista o dict
+        status = api_data.get('Status', {})
+        if isinstance(status, list):
+            status = status[0] if status else {}
+        
+        if status.get('Code') != 'OK':
+            return
+        
+        # ✅ CORRECCIÓN v2.1.7: Detail puede ser lista o dict
+        detail = api_data.get('Detail', {})
         if isinstance(detail, list):
             detail = detail[0] if detail else {}
+        
+        # ✅ CORRECCIÓN v2.1.7: Data puede ser lista o dict
+        data = detail.get('Data', {})
+        if isinstance(data, list):
+            data = data[0] if data else {}
         
         # Mapear códigos de estado Palletways según documentación oficial página 14
         status_mapping = {
@@ -205,27 +256,27 @@ class PalletwaysShipment(models.Model):
             '900': 'delivered',   # JOB COMPLETE - Trabajo finalizado
         }
         
-        pw_status = str(detail.get('StatusCode', ''))
+        pw_status = str(data.get('StatusCode', ''))
         new_status = status_mapping.get(pw_status, self.status)
         
         # Datos adicionales
         update_vals = {
             'status': new_status,
             'palletways_status_code': pw_status,
-            'palletways_status_desc': detail.get('StatusDescription', ''),
+            'palletways_status_desc': data.get('StatusDescription', ''),
             'last_update': fields.Datetime.now(),
             'last_status_response': json.dumps(api_data),
         }
         
         # Actualizar número de consignación si viene
-        if detail.get('ConNo'):
-            update_vals['consignment_number'] = detail.get('ConNo')
+        if data.get('ConNo'):
+            update_vals['consignment_number'] = data.get('ConNo')
         
         # Fecha de entrega real si está entregado
-        if new_status == 'delivered' and detail.get('DeliveryDate'):
+        if new_status == 'delivered' and data.get('DeliveryDate'):
             try:
                 delivery_datetime = datetime.strptime(
-                    f"{detail.get('DeliveryDate')} {detail.get('DeliveryTime', '00:00')}",
+                    f"{data.get('DeliveryDate')} {data.get('DeliveryTime', '00:00')}",
                     '%Y-%m-%d %H:%M'
                 )
                 update_vals['actual_delivery_date'] = delivery_datetime
@@ -239,11 +290,11 @@ class PalletwaysShipment(models.Model):
             status_names = dict(self._fields['status'].selection)
             self.picking_id.message_post(
                 body=f"Estado Palletways actualizado: {status_names.get(new_status, new_status)}<br/>"
-                     f"Código PW: {pw_status} - {detail.get('StatusDescription', '')}"
+                     f"Código PW: {pw_status} - {data.get('StatusDescription', '')}"
             )
     
     def action_download_labels(self):
-        """Descargar etiquetas PDF"""
+        """Descargar etiquetas PDF según documentación oficial página 12"""
         self.ensure_one()
         
         # Verificar si es un envío TEST
@@ -278,7 +329,7 @@ class PalletwaysShipment(models.Model):
             raise UserError(f"Error descargando etiquetas: {e}")
     
     def action_download_pod(self):
-        """Descargar comprobante de entrega"""
+        """Descargar comprobante de entrega según documentación oficial página 12"""
         self.ensure_one()
         
         # Verificar si es un envío TEST
@@ -388,7 +439,7 @@ class PalletwaysShipment(models.Model):
             )
     
     def action_get_notes(self):
-        """Obtener notas del envío desde Palletways"""
+        """Obtener notas del envío desde Palletways según documentación oficial página 11"""
         self.ensure_one()
         
         try:
@@ -401,7 +452,7 @@ class PalletwaysShipment(models.Model):
                     detail = [detail] if detail else []
                 
                 notes_text = []
-                for note in detail:
+                for note in detail: 
                     note_date = note.get('NoteDate', '')
                     note_time = note.get('NoteTime', '')
                     note_text = note.get('NoteText', '')

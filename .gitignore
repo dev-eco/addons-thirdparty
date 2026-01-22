@@ -67,8 +67,13 @@ desktop.ini
 # no deben versionarse, solo los archivos fuente
 docs/_build/
 *.pdf
+*.md
 
+# Others
 .aider.chat.history.md
 .aider.input.history
 .aider.tags.cache.v4/*
 .aider*
+palletways_shipping_integration/*
+product_palletization/*
+website_dist_checkout/*

@@ -62,6 +62,87 @@ class StockPicking(models.Model):
             else:
                 picking.palletways_tracking_url = False
 
+    def button_validate(self):
+        """
+        ✅ CORRECCIÓN v2.1.8: Capturar excepción correctamente con 'as e'
+        
+        El método palletways_send_shipping() devuelve una LISTA de diccionarios:
+        [
+            {
+                'exact_price': float,
+                'tracking_number': str,
+                'labels': [],  # Vacío - se descargan después con botón
+            }
+        ]
+        
+        Se llama automáticamente al validar albaranes con transportista Palletways
+        """
+        _logger.info(f"button_validate() iniciado para {self.name}")
+        
+        # Verificar si este picking tiene transportista Palletways
+        if self.carrier_id and self.carrier_id.delivery_type == 'palletways':
+            _logger.info(f"Picking {self.name} usa transportista Palletways")
+            
+            try:
+                # Llamar al método de envío de Palletways ANTES de validar
+                _logger.info(f"Llamando a palletways_send_shipping() para {self.name}")
+                
+                # ✅ CORRECCIÓN v2.1.8: El método devuelve una LISTA de diccionarios
+                results = self.carrier_id.palletways_send_shipping([self])
+                
+                # ✅ CORRECCIÓN v2.1.8: Verificar que results sea una lista
+                if not results:
+                    raise UserError("Error: palletways_send_shipping() devolvió lista vacía")
+                
+                if not isinstance(results, list):
+                    _logger.error(f"Error: results no es lista, es {type(results)}: {results}")
+                    raise UserError(f"Error: palletways_send_shipping() devolvió tipo inválido: {type(results)}")
+                
+                # ✅ CORRECCIÓN v2.1.8: Tomar el primer resultado
+                result = results[0]
+                _logger.info(f"Resultado recibido: {result}")
+                
+                # ✅ CORRECCIÓN v2.1.8: Verificar estructura del resultado
+                if not isinstance(result, dict):
+                    _logger.error(f"Error: result no es dict, es {type(result)}: {result}")
+                    raise UserError(f"Error: Resultado inesperado de palletways_send_shipping(): {type(result)}")
+                
+                # ✅ CORRECCIÓN v2.1.8: Verificar tracking_number
+                tracking_number = result.get('tracking_number')
+                if not tracking_number:
+                    _logger.error(f"Error: No hay tracking_number en resultado: {result}")
+                    raise UserError("Error: No se recibió tracking_number del envío Palletways")
+                
+                _logger.info(f"✓ Envío Palletways creado exitosamente: {tracking_number}")
+                
+                # ✅ CORRECCIÓN v2.1.8: Mensaje de éxito en picking
+                self.message_post(
+                    body=f"✅ Envío Palletways creado exitosamente<br/>"
+                         f"<strong>Tracking ID:</strong> {tracking_number}",
+                    message_type='comment'
+                )
+                
+            except UserError as e:
+                # ✅ CORRECCIÓN CRÍTICA v2.1.8: Capturar excepción con 'as e'
+                # Re-lanzar errores de usuario
+                _logger.error(f"Error de usuario en button_validate: {str(e)}")
+                raise
+                
+            except Exception as e:
+                error_msg = f"Error inesperado: {str(e)}"
+                _logger.error(f"✗ Error inesperado para {self.name}: {error_msg}", exc_info=True)
+                self.message_post(
+                    body=f"❌ Error inesperado creando envío:<br/>{error_msg}",
+                    message_type='comment'
+                )
+                raise UserError(error_msg)
+        else:
+            _logger.info(f"Picking {self.name} no usa Palletways, continuando validación normal")
+        
+        # Llamar al método original de validación
+        _logger.info(f"Llamando a super().button_validate() para {self.name}")
+        return super().button_validate()
+
     def action_palletways_track(self):
         """Abrir seguimiento de Palletways"""
         self.ensure_one()

@@ -40,13 +40,13 @@
             </field>
         </record>
 
-        <!-- Extender vista lista para mostrar tracking ID -->
+        <!-- Extender vista lista - CORRECCIÓN: Usar External ID correcto para Odoo 17 -->
         <record id="view_picking_tree_palletways" model="ir.ui.view">
             <field name="name">stock.picking.tree.palletways</field>
             <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_tree"/>
+            <field name="inherit_id" ref="stock.vpicktree"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='carrier_id']" position="after">
+                <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="palletways_tracking_id" optional="hide"/>
                     <field name="palletways_status" optional="hide"/>
                 </xpath>

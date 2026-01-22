@@ -1,46 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Unidades facturables Palletways según documentación oficial -->
+        <!-- ✅ CORRECCIÓN v2.1.1: Unidades facturables Palletways según documentación oficial página 14 -->
         <record id="bill_unit_mqp" model="bill.unit">
             <field name="name">Mini Quarter Pallet</field>
             <field name="bill_unit_key">MQP</field>
-            <field name="bill_unit_value">Mini Quarter Pallet - (150kg)</field>
+            <field name="bill_unit_value">Mini Quarter Pallet - (150kg, 0.6m altura)</field>
         </record>
 
         <record id="bill_unit_qp" model="bill.unit">
             <field name="name">Quarter Pallet</field>
             <field name="bill_unit_key">QP</field>
-            <field name="bill_unit_value">Quarter Pallet - (300kg)</field>
-        </record>
-
-        <record id="bill_unit_selp" model="bill.unit">
-            <field name="name">Super Euro Light Pallet</field>
-            <field name="bill_unit_key">SELP</field>
-            <field name="bill_unit_value">Super Euro Light Pallet - (600kg)</field>
+            <field name="bill_unit_value">Quarter Pallet - (300kg, 1.1m altura)</field>
         </record>
 
         <record id="bill_unit_hp" model="bill.unit">
             <field name="name">Half Pallet</field>
             <field name="bill_unit_key">HP</field>
-            <field name="bill_unit_value">Half Pallet - (600kg)</field>
+            <field name="bill_unit_value">Half Pallet - (600kg, 1.4m altura)</field>
         </record>
 
-        <record id="bill_unit_elp" model="bill.unit">
-            <field name="name">Extra Light Pallet</field>
-            <field name="bill_unit_key">ELP</field>
-            <field name="bill_unit_value">Extra Light Pallet - (450kg)</field>
-        </record>
-
+        <!-- ✅ AÑADIDO v2.1.1: Light Pallet que faltaba -->
         <record id="bill_unit_lp" model="bill.unit">
             <field name="name">Light Pallet</field>
             <field name="bill_unit_key">LP</field>
-            <field name="bill_unit_value">Light Pallet - (750kg)</field>
+            <field name="bill_unit_value">Light Pallet - (750kg, 2.2m altura)</field>
         </record>
 
         <record id="bill_unit_fp" model="bill.unit">
             <field name="name">Full Pallet</field>
             <field name="bill_unit_key">FP</field>
-            <field name="bill_unit_value">Full Pallet - (1200kg)</field>
+            <field name="bill_unit_value">Full Pallet - (1200kg, 2.2m altura)</field>
         </record>
     </data>
 </odoo>

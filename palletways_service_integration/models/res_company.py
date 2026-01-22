@@ -17,8 +17,8 @@ class ResCompany(models.Model):
     
     palletways_api_url = fields.Char(
         string='URL API Palletways',
-        default="https://portal.palletways.com/api/",
-        help="URL del API de Palletways proporcionada por su depot"
+        default="https://api.palletways.com/",
+        help="URL oficial del API de Palletways: https://api.palletways.com/"
     )
     
     palletways_api_key = fields.Char(
@@ -36,4 +36,3 @@ class ResCompany(models.Model):
         except Exception as e:
             _logger.error(f"Error inicializando campos Palletways en res.company: {e}")
             raise
-

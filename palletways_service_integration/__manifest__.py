@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Palletways Shipping Integration',
-    'version': '17.0.2.0.0',
+    'version': '17.0.2.1.0',
     'category': 'Inventory/Delivery',
     'summary': 'Integración completa con API oficial de Palletways para envíos',
     'description': '''
@@ -38,6 +38,14 @@
     • getPodByTrackingId - Comprobante entrega
     • availableServices - Servicios disponibles
     • getNotes - Notas del envío
+    
+    ✅ Correcciones v2.1.0:
+    • Endpoint API corregido a https://api.palletways.com/
+    • Half Pallet corregido a 600kg (España)
+    • Estructura Manifest según documentación oficial
+    • Parámetros createConsignment en query string
+    • Códigos de servicio actualizados
+    • Tipos de pallet con límites correctos
     ''',
     'author': 'EcoCaucho Tech Team',
     'website': 'https://www.ecocaucho.com',
@@ -55,8 +63,9 @@
         # Seguridad
         'security/ir.model.access.csv',
 
-        # Datos básicos únicamente
+        # Datos básicos
         'data/bill_unit.xml',
+        'data/palletways_pallet_types.xml',
 
         # Vistas principales
         'views/palletways_api_client_views.xml',
@@ -74,11 +83,8 @@
         # Cron (opcional)
         'data/cron_data.xml',
     ],
-    'demo': [
-        # Eliminar demos por ahora
-    ],
+    'demo': [],
     'installable': True,
     'auto_install': False,
     'application': False,
-    # 'post_init_hook': 'post_init_hook',  # Desactivado temporalmente
 }
