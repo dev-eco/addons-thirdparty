@@ -1,0 +1,16 @@
+<!-- website_dist_checkout/security/security.xml -->
+<odoo>
+    <record id="group_distributor" model="res.groups">
+        <field name="name">Distribuidor</field>
+        <field name="category_id" ref="base.module_category_website"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+    
+    <!-- Regla para que distribuidores solo vean sus propios pedidos -->
+    <record id="rule_distributor_orders" model="ir.rule">
+        <field name="name">Distribuidor: Solo pedidos propios</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="domain_force">[('partner_id.commercial_partner_id', '=', user.partner_id.commercial_partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('website_dist_checkout.group_distributor'))]"/>
+    </record>
+</odoo>

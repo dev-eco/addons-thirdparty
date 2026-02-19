@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Transportista Palletways básico sin referencia al API client -->
+        <record id="delivery_carrier_palletways" model="delivery.carrier">
+            <field name="name">Palletways España</field>
+            <field name="delivery_type">palletways</field>
+            <field name="palletways_service_code">B</field>
+            <field name="palletways_default_bill_unit">FP</field>
+            <field name="palletways_auto_book_in">True</field>
+            <field name="palletways_auto_taillift">True</field>
+            <field name="palletways_auto_handball">False</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+{
+    'name': 'Website Distributor Checkout',
+    'version': '17.0.1.0.0',
+    'summary': 'Portal B2B para gestión de envíos por distribuidores',
+    'category': 'Website/eCommerce',
+    'author': 'EcoCaucho',
+    'website': 'https://www.ecocaucho.com',
+    'license': 'LGPL-3',
+    'depends': [
+        'website',
+        'website_sale',
+        'delivery',
+        'portal',
+        'stock',
+        'mail',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
+        'views/sale_order_view.xml',
+        'views/stock_picking_view.xml',
+        'views/website_sale_templates.xml',
+        'views/portal_templates.xml',
+        'data/sample_carrier.xml',
+    ],
+    'application': False,
+    'installable': True,
+    'auto_install': False,
+    'sequence': 20,  # Después de product_palletization
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+        Documentación de tipos de pallet según Palletways España
+        Fuente: Documentación oficial Palletways API página 14
+        
+        MQP - Mini Quarter Pallet
+        - Peso máximo: 150kg
+        - Altura máxima: 0.6m
+        - Dimensiones base: 1.2 x 1m
+        
+        QP - Quarter Pallet
+        - Peso máximo: 300kg
+        - Altura máxima: 1.1m
+        - Dimensiones base: 1.2 x 1m
+        
+        HP - Half Pallet (CORRECCIÓN ESPAÑA)
+        - Peso máximo: 600kg
+        - Altura máxima: 1.4m
+        - Dimensiones base: 1.2 x 1m
+        
+        LP - Light Pallet
+        - Peso máximo: 750kg
+        - Altura máxima: 2.2m
+        - Dimensiones base: 1.2 x 1m
+        
+        FP - Full Pallet
+        - Peso máximo: 1200kg
+        - Altura máxima: 2.2m
+        - Dimensiones base: 1.2 x 1m
+        -->
+    </data>
+</odoo>

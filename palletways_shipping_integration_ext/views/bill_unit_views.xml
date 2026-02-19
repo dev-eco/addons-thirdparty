@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_bill_unit_form" model="ir.ui.view">
+            <field name="name">bill.unit.form</field>
+            <field name="model">bill.unit</field>
+            <field name="arch" type="xml">
+                <form string="Unidad de Facturación">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="bill_unit_key"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="max_weight"/>
+                                <field name="max_height"/>
+                                <field name="max_width"/>
+                                <field name="max_length"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripción">
+                                <field name="description"/>
+                            </page>
+                            <page string="Transportistas">
+                                <field name="carrier_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_bill_unit_tree" model="ir.ui.view">
+            <field name="name">bill.unit.tree</field>
+            <field name="model">bill.unit</field>
+            <field name="arch" type="xml">
+                <tree string="Unidades de Facturación">
+                    <field name="name"/>
+                    <field name="bill_unit_key"/>
+                    <field name="max_weight"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_bill_unit_search" model="ir.ui.view">
+            <field name="name">bill.unit.search</field>
+            <field name="model">bill.unit</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Unidades de Facturación">
+                    <field name="name"/>
+                    <field name="bill_unit_key"/>
+                    <filter string="Activos" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Inactivos" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_bill_unit" model="ir.actions.act_window">
+            <field name="name">Unidades de Facturación</field>
+            <field name="res_model">bill.unit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_bill_unit_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primera unidad de facturación
+                </p>
+                <p>
+                    Las unidades de facturación definen los tipos de pallets
+                    que se pueden utilizar en los envíos de Palletways.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_bill_unit"
+                  name="Unidades de Facturación"
+                  parent="stock.menu_stock_config_settings"
+                  action="action_bill_unit"
+                  sequence="20"/>
+    </data>
+</odoo>

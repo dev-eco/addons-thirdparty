@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Cliente API Palletways por defecto -->
+        <record id="palletways_api_client_default" model="palletways.api.client">
+            <field name="name">Palletways API - Configurar</field>
+            <field name="api_endpoint">https://api.palletways.com/</field>
+            <field name="account_code">CONFIGURAR_CODIGO_CLIENTE</field>
+            <field name="api_key">CONFIGURAR_API_KEY</field>
+            <field name="test_mode">True</field>
+        </record>
+    </data>
+</odoo>

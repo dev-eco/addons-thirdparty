@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="palletways_configuration" model="ir.ui.view">
+        <field name="name">Palletways Configuration</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="Palletways Configuration">
+                    <group>
+                        <group>
+                            <field name="use_palletways_shipping_provider"/>
+                            <field name="palletways_api_url"/>
+                            <field name="palletways_api_key"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

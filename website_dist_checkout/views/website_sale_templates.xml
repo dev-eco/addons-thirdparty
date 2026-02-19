@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Plantillas para el sitio web de ventas del distribuidor -->
+    <template id="distributor_portal_layout" name="Distributor Portal Layout" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('breadcrumb')]" position="before">
+            <div class="row mb-3" t-if="request.env.user.partner_id.commercial_partner_id">
+                <div class="col-12">
+                    <a href="/distribuidor/pedidos" class="btn btn-primary">
+                        <i class="fa fa-truck"></i> Pedidos de Distribución
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

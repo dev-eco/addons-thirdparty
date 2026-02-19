@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bill_unit_user,bill.unit.user,model_bill_unit,base.group_user,1,0,0,0
+access_bill_unit_manager,bill.unit.manager,model_bill_unit,stock.group_stock_manager,1,1,1,1
+access_palletways_service_user,palletways.service.user,model_palletways_service,base.group_user,1,0,0,0
+access_palletways_service_manager,palletways.service.manager,model_palletways_service,stock.group_stock_manager,1,1,1,1

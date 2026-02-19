@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actualizar vista de transportista para Palletways -->
+        <record id="view_delivery_carrier_form_palletways" model="ir.ui.view">
+            <field name="name">delivery.carrier.form.palletways</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <!-- Añadir página de configuración Palletways -->
+                <xpath expr="//page[@name='destination']" position="before">
+                    <page string="Configuración Palletways" name="palletways_configuration"
+                          invisible="delivery_type != 'palletways'">
+                        <group>
+                            <group name="api_config" string="Configuración API">
+                                <field name="palletways_api_client_id" 
+                                       required="delivery_type == 'palletways'"
+                                       options="{'no_create': True}"/>
+                            </group>
+                            <group name="service_config" string="Configuración de Servicio">
+                                <field name="palletways_service_code"/>
+                                <field name="palletways_default_bill_unit"/>
+                            </group>
+                        </group>
+                        
+                        <group name="auto_config" string="Configuraciones Automáticas">
+                            <group>
+                                <field name="palletways_auto_book_in"/>
+                                <field name="palletways_auto_taillift"/>
+                                <field name="palletways_auto_handball"/>
+                            </group>
+                        </group>
+                        
+                        <group name="legacy_config" string="Configuración Legacy (Deprecated)">
+                            <group>
+                                <field name="tail_lift" readonly="1"/>
+                                <field name="notification" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="bill_unit_ids" widget="many2many_tags" readonly="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="res_config_settings_view_form_dist" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.dist</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <!-- Inserción robusta en el <form> raíz (Odoo 17) -->
+      <xpath expr="//form[1]" position="inside">
+        <div class="app_settings_block" string="Portal Distribuidores" data-key="website_dist_checkout">
+          <h2>Envíos gestionados por distribuidor</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane"/>
+              <div class="o_setting_right_pane">
+                <label for="dist_carrier_id"/>
+                <div class="text-muted">
+                  Carrier que representa 'gestiona distribuidor'.
+                </div>
+                <field name="dist_carrier_id" options="{'no_create': False}" class="oe_inline"/>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane"/>
+              <div class="o_setting_right_pane">
+                <label for="dist_require_label"/>
+                <div class="text-muted">
+                  Bloquear validación del albarán si falta etiqueta.
+                </div>
+                <field name="dist_require_label" class="oe_inline"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+  <!-- Carrier 'Envío gestionado por el distribuidor' usando el producto estándar de portes -->
+  <record id="delivery_carrier_distributor" model="delivery.carrier">
+    <field name="name">Envío gestionado por el distribuidor</field>
+    <field name="delivery_type">fixed</field>
+    <field name="fixed_price" eval="0.0"/>
+    <field name="website_published">True</field>
+    <field name="product_id" ref="delivery.product_product_delivery"/>
+    <field name="company_id" eval="False"/> <!-- Disponible para todas las compañías -->
+  </record>
+
+  <!-- Parámetros por defecto del módulo -->
+  <record id="ir_config_param_carrier" model="ir.config_parameter">
+    <field name="key">website_dist_checkout.carrier_id</field>
+    <field name="value" eval="str(ref('website_dist_checkout.delivery_carrier_distributor'))"/>
+  </record>
+
+  <record id="ir_config_param_require_label" model="ir.config_parameter">
+    <field name="key">website_dist_checkout.require_label</field>
+    <field name="value">0</field>
+  </record>
+
+</odoo>

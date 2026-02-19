@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_order_form_dist_fields" model="ir.ui.view">
+    <field name="name">sale.order.form.dist.fields</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/notebook" position="inside">
+        <page string="Envío distribuidor">
+          <group>
+            <group>
+              <field name="client_order_ref"/> 
+              <field name="dist_is_managed" readonly="1"/>
+              <field name="dist_carrier_name"/>
+              <field name="dist_carrier_account"/>
+              <field name="dist_pickup_datetime"/>
+              <field name="dist_pickup_slot"/>
+            </group>
+            <group>
+              <field name="dist_label_attachment_id" context="{'bin_size': False}"/>
+              <field name="dist_packing_slip_attachment_id" context="{'bin_size': False}"/>
+            </group>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -66,5 +66,14 @@ desktop.ini
 # Si generas documentación automáticamente, los archivos generados
 # no deben versionarse, solo los archivos fuente
 docs/_build/
-*.pdf
+#*.pdf
+*.md
 
+# Others
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v4/*
+.aider*
+palletways_shipping_integration/*
+product_palletization/*
+website_dist_checkout/*

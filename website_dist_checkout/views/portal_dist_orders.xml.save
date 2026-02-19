@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="portal_dist_orders" name="Portal Distribuidor">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <div class="container o_portal_wrap">
+        <div class="row o_portal_search_panel">
+          <div class="col-12 col-md-8 mb-2">
+            <h3>Pedidos (Distribuidor)</h3>
+          </div>
+          <div class="col-12 col-md-4">
+	    
+          </div>
+        </div>
+
+        <div class="table-responsive mt-3">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Facturación</th>
+                <th>Ref. cliente</th>
+                <th>Enviar a</th>
+                <th>Método envío</th>
+                <th>Entrega prevista</th>
+                <th>Tracking</th>
+                <th class="text-end">Total</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="orders" t-as="so">
+                <tr>
+                  <td>
+                    <a t-attf-href="/my/orders/#{so.id}">
+                      <t t-esc="so.name"/>
+                    </a>
+                  </td>
+                  <td>
+                    <span t-esc="order_dates.get(so.id)"/>
+                  </td>
+                  <td>
+                    <t t-esc="so.state == 'sale' and 'Confirmado' or (so.state == 'draft' and 'Presupuesto' or (so.state == 'done' and 'Cerrado' or so.state))"/>
+                  </td>
+                  <td>
+                    <t t-esc="{'no':'Sin facturar','to invoice':'A facturar','invoiced':'Facturado'}.get(so.invoice_status, so.invoice_status)"/>
+                  </td>
+                  <td><t t-esc="so.client_order_ref or ''"/></td>
+                  <td><t t-esc="so.partner_shipping_id and so.partner_shipping_id.display_name or ''"/></td>
+                  <td><t t-esc="deliveries.get(so.id, {}).get('carrier_name','')"/></td>
+                  <td><t t-esc="deliveries.get(so.id, {}).get('expected_date_str','')"/></td>
+                  <td style="max-width:180px;">
+                    <span class="text-truncate d-inline-block" style="max-width: 180px;"
+                          t-att-title="deliveries.get(so.id, {}).get('tracking','')">
+                      <t t-esc="deliveries.get(so.id, {}).get('tracking','')"/>
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <span t-esc="order_amounts.get(so.id)"/>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm" role="group">
+                      <a t-attf-href="/my/orders/#{so.id}" class="btn btn-outline-secondary">
+                        Ver
+                      </a>
+                      <a t-attf-href="/my/orders/#{so.id}/dist-shipping" class="btn btn-secondary">
+                        Envío distribuidor
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="11" class="py-0">
+                    <small class="text-muted">
+                      Entrega: <t t-esc="deliveries.get(so.id, {}).get('delivery_state','')"/>
+                    </small>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </div>
+
+        <t t-call="portal.pager">
+          <t t-set="url" t-value="'/my/distributor/orders'"/>
+          <t t-set="url_args" t-value="{'search': search, 'sortby': sortby}"/>
+          <t t-set="pager" t-value="pager"/>
+        </t>
+      </div>
+    </t>
+  </template>
+</odoo>
