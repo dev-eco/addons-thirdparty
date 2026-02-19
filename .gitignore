@@ -66,7 +66,7 @@ desktop.ini
 # Si generas documentación automáticamente, los archivos generados
 # no deben versionarse, solo los archivos fuente
 docs/_build/
-*.pdf
+#*.pdf
 *.md
 
 # Others

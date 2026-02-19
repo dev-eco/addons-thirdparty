@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_palletways_service_form" model="ir.ui.view">
+            <field name="name">palletways.service.form</field>
+            <field name="model">palletways.service</field>
+            <field name="arch" type="xml">
+                <form string="Servicio Palletways">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="service_code"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="delivery_time"/>
+                                <field name="is_express"/>
+                                <field name="is_international"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripción">
+                                <field name="description"/>
+                            </page>
+                            <page string="Transportistas">
+                                <field name="carrier_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_palletways_service_tree" model="ir.ui.view">
+            <field name="name">palletways.service.tree</field>
+            <field name="model">palletways.service</field>
+            <field name="arch" type="xml">
+                <tree string="Servicios Palletways">
+                    <field name="name"/>
+                    <field name="service_code"/>
+                    <field name="delivery_time"/>
+                    <field name="is_express"/>
+                    <field name="is_international"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_palletways_service_search" model="ir.ui.view">
+            <field name="name">palletways.service.search</field>
+            <field name="model">palletways.service</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Servicios Palletways">
+                    <field name="name"/>
+                    <field name="service_code"/>
+                    <filter string="Express" name="express" domain="[('is_express','=',True)]"/>
+                    <filter string="Internacional" name="international" domain="[('is_international','=',True)]"/>
+                    <filter string="Activos" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Inactivos" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_palletways_service" model="ir.actions.act_window">
+            <field name="name">Servicios Palletways</field>
+            <field name="res_model">palletways.service</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_palletways_service_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer servicio Palletways
+                </p>
+                <p>
+                    Los servicios definen los tipos de envío disponibles
+                    a través de Palletways.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_palletways_service"
+                  name="Servicios Palletways"
+                  parent="stock.menu_stock_config_settings"
+                  action="action_palletways_service"
+                  sequence="21"/>
+    </data>
+</odoo>

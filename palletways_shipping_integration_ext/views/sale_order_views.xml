@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_palletways" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.palletways</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="dist_is_managed" groups="sales_team.group_sale_manager"/>
+                <field name="portal_tracking" readonly="1" attrs="{'invisible': [('portal_tracking', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
